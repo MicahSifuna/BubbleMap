@@ -98,22 +98,23 @@ const Map = () => {
 
          <div id='map'>
             {loading && <div>Loading GeoJSON data...</div>}
-            {!loading && geojsonData && (
-               <MapContainer
-                  style={{ height: "600px" }}
-                  center={[12.28325, 22.81724]}
-                  zoom={3}
-                  ref={mapref}
-               >
-                  <TileLayer
-                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  />
 
-                  <MarkerClusterGroup
-                     maxClusterRadius={20}
-                     iconCreateFunction={createClusterCustomIcon}
-                  >
+            <MapContainer
+               style={{ height: "600px" }}
+               center={[12.28325, 22.81724]}
+               zoom={3}
+               ref={mapref}
+            >
+               <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+               />
+
+               <MarkerClusterGroup
+                  maxClusterRadius={20}
+                  iconCreateFunction={createClusterCustomIcon}
+               >
+                  {!loading && geojsonData && (
                      <GeoJSON
                         data={geojsonData}
                         pointToLayer={(feature, latlng) => L.marker(latlng, { icon: pointIcon })}
@@ -128,9 +129,10 @@ const Map = () => {
                            `);
                         }}
                      />
-                  </MarkerClusterGroup>
-               </MapContainer>
-            )}
+                  )}
+
+               </MarkerClusterGroup>
+            </MapContainer>
          </div>
       </>
    )
